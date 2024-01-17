@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
@@ -13,6 +14,17 @@ let YellowBtn = styled.button`
 
 export default function Detail(props) {
   let { id } = useParams();
+  let [alert, setAlert] = useState(true);
+
+  useEffect(() => {
+    //여기적은 코드는 컴포넌트 로드 & 업데이트 마다 실행됨
+    console.log(1);
+    //return을 쓰면 리턴문 안에있는게 실행 된 다음 console.log(1) 실행됨
+    //코드실행전 클린업할게있을때 유용
+    return setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+  }, []);
 
   return (
     <div className='container'>
@@ -32,6 +44,9 @@ export default function Detail(props) {
           </YellowBtn>
         </div>
       </Box>
+      {alert == true ? (
+        <div className='alert alert-warning'>2초이내 구매시 할인</div>
+      ) : null}
     </div>
   );
 }
