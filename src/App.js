@@ -51,8 +51,13 @@ function App() {
                     });
                 }}
               >
-                버튼
+                get요청 버튼
               </button>
+              {/* <button onClick={()=>{
+                axios.post(
+                  'api', {name : 'kim'}
+                  )
+              }}>post요청 버튼</button> */}
             </div>
           }
         />
