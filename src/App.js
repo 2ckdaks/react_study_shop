@@ -3,7 +3,9 @@ import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import data from './data.js';
 import { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+
+import Detail from './routes/Detail.js';
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -37,8 +39,19 @@ function App() {
             </div>
           }
         />
-        <Route path='/about' element={<div>어바웃페이지임</div>} />
-        <Route path='/detail' element={<div>상세페이지임</div>} />
+        <Route
+          path='/about'
+          element={
+            <div>
+              어바웃페이지임<Outlet></Outlet>
+            </div>
+          }
+        >
+          <Route path='member' element={<div>멤버들</div>} />
+          <Route path='location' element={<div>회사위치</div>} />
+        </Route>
+        <Route path='/detail' element={<Detail />} />
+        <Route path='*' element={<div>없는페이지임</div>} />
       </Routes>
     </div>
   );
