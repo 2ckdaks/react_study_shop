@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import data from './data.js';
 import { useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 import Detail from './routes/Detail.js';
 
 function App() {
   let [shoes, setShoes] = useState(data);
-  console.log(shoes);
 
   return (
     <div className='App'>
@@ -36,6 +36,23 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get('https://codingapple1.github.io/shop/data2.json')
+                    .then((결과) => {
+                      console.log(결과.data);
+                      let copy = [...shoes];
+                      copy = [...shoes, ...결과.data];
+                      setShoes(copy);
+                    })
+                    .catch(() => {
+                      console.log('실패함');
+                    });
+                }}
+              >
+                버튼
+              </button>
             </div>
           }
         />
