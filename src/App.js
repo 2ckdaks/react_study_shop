@@ -1,6 +1,7 @@
 import './App.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import data from './data.js';
 
 function App() {
   return (
