@@ -50,7 +50,7 @@ function App() {
           <Route path='member' element={<div>멤버들</div>} />
           <Route path='location' element={<div>회사위치</div>} />
         </Route>
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
         <Route path='*' element={<div>없는페이지임</div>} />
       </Routes>
     </div>

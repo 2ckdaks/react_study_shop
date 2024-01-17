@@ -1,4 +1,8 @@
-export default function Detail() {
+import { useParams } from 'react-router-dom';
+
+export default function Detail(props) {
+  let { id } = useParams();
+
   return (
     <div className='container'>
       <div className='row'>
@@ -9,9 +13,9 @@ export default function Detail() {
           />
         </div>
         <div className='col-md-6'>
-          <h4 className='pt-5'>상품명</h4>
-          <p>상품설명</p>
-          <p>120000원</p>
+          <h4 className='pt-5'>{props.shoes[id].title}</h4>
+          <p>{props.shoes[id].content}</p>
+          <p>{props.shoes[id].price}</p>
           <button className='btn btn-danger'>주문하기</button>
         </div>
       </div>
