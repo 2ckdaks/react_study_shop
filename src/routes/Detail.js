@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
+
+import { Context1 } from "./../App.js";
 
 let Box = styled.div`
   padding: 20px;
@@ -17,6 +19,9 @@ export default function Detail(props) {
   let { id } = useParams();
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
+
+  let { 재고 } = useContext(Context1);
+  console.log({ 재고 });
 
   useEffect(() => {
     //여기적은 코드는 컴포넌트 로드 & 업데이트 마다 실행됨
