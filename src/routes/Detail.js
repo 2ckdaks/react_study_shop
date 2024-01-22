@@ -5,6 +5,9 @@ import { Nav } from "react-bootstrap";
 
 import { Context1 } from "./../App.js";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../store";
+
 let Box = styled.div`
   padding: 20px;
   color: grey;
@@ -16,12 +19,17 @@ let YellowBtn = styled.button`
 `;
 
 export default function Detail(props) {
+  let itemState = useSelector((state) => {
+    return state.item;
+  });
+  console.log(itemState);
+  let dispatch = useDispatch();
+
   let { id } = useParams();
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
 
   let { 재고 } = useContext(Context1);
-  console.log({ 재고 });
 
   useEffect(() => {
     //여기적은 코드는 컴포넌트 로드 & 업데이트 마다 실행됨
@@ -46,7 +54,15 @@ export default function Detail(props) {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
-          <YellowBtn bg="skyblue" className="btn btn-danger">
+          <YellowBtn
+            bg="skyblue"
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(
+                addItem({ id: 1, name: props.shoes[id].title, count: 1 })
+              );
+            }}
+          >
             주문하기
           </YellowBtn>
         </div>

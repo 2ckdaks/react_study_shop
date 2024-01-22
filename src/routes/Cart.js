@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../sotre/userSlice";
 import { increaseAge } from "../sotre/userSlice";
+import { addCount } from "../store";
 
 export default function Cart() {
   let state = useSelector((state) => {
@@ -38,10 +39,9 @@ export default function Cart() {
                 <td>{state.item[i].name}</td>
                 <td>{state.item[i].count}</td>
                 <td>
-                  {" "}
                   <button
                     onClick={() => {
-                      dispatch(setUser());
+                      dispatch(addCount(state.item[i].id));
                     }}
                   >
                     +
