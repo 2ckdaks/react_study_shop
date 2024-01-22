@@ -1,15 +1,19 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import user from "./sotre/userSlice";
 
-let user = createSlice({
-  name: "user",
-  initialState: "Lee",
-  reducers: {
-    setUser(state) {
-      return "LCM" + state;
-    },
-  },
-});
-export let { setUser } = user.actions;
+// let user = createSlice({
+//   name: "user",
+//   initialState: { name: "Lee", age: 27 },
+//   reducers: {
+//     setUser(state) {
+//       return "LCM";
+//     },
+//     increaseAge(state, a) {
+//       state.age += a.payload;
+//     },
+//   },
+// });
+// export let { setUser, increaseAge } = user.actions;
 
 let stock = createSlice({
   name: "stock",
