@@ -22,7 +22,7 @@ export default function Detail(props) {
   let itemState = useSelector((state) => {
     return state.item;
   });
-  console.log(itemState);
+  // console.log(itemState);
   let dispatch = useDispatch();
 
   let { id } = useParams();
@@ -31,14 +31,25 @@ export default function Detail(props) {
 
   let { 재고 } = useContext(Context1);
 
+  let findItem = props.shoes.find((x) => x.id == id);
+
   useEffect(() => {
     //여기적은 코드는 컴포넌트 로드 & 업데이트 마다 실행됨
-    console.log(1);
+    // console.log(1);
     //return을 쓰면 리턴문 안에있는게 실행 된 다음 console.log(1) 실행됨
     //코드실행전 클린업할게있을때 유용
     return setTimeout(() => {
       setAlert(false);
     }, 2000);
+  }, []);
+
+  useEffect(() => {
+    let getItem = localStorage.getItem("watched");
+    getItem = JSON.parse(getItem);
+    getItem.push(findItem.id);
+    getItem = new Set(getItem);
+    getItem = Array.from(getItem);
+    localStorage.setItem("watched", JSON.stringify(getItem));
   }, []);
 
   return (

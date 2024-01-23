@@ -2,7 +2,7 @@ import "./App.css";
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import data from "./data.js";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   Routes,
   Route,
@@ -26,6 +26,14 @@ function App() {
   localStorage.setItem("data", JSON.stringify(obj));
   let out = localStorage.getItem("data");
   console.log(JSON.parse(out));
+
+  useEffect(() => {
+    let getItem = localStorage.getItem("watched");
+    //이미 데이터가있으면 아래 코드 실행하지 않기
+    if (!getItem) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    }
+  }, []);
 
   return (
     <div className="App">
