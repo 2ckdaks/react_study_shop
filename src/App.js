@@ -57,6 +57,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      {/* routes안에 컴포넌트를 보통 전부 lazy임포트하기때문에 로딩 화면 추가 */}
       <Suspense fallback={<div>loading</div>}>
         <Routes>
           <Route
