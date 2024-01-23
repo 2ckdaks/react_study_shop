@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import Detail from "./routes/Detail.js";
 import Cart from "./routes/Cart";
+import { useQuery } from "react-query";
 
 // export let Context1 = React.createContext();
 export let Context1 = createContext();
@@ -34,6 +35,11 @@ function App() {
       localStorage.setItem("watched", JSON.stringify([]));
     }
   }, []);
+
+  useQuery("작명", async () => {
+    const a = await axios.get("https://codingapple1.github.io/userdata.json");
+    return console.log(a.data);
+  });
 
   return (
     <div className="App">
