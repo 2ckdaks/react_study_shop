@@ -3,7 +3,14 @@ import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import data from "./data.js";
 import { createContext, useState } from "react";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  Outlet,
+  json,
+} from "react-router-dom";
 import axios from "axios";
 import Detail from "./routes/Detail.js";
 import Cart from "./routes/Cart";
@@ -14,6 +21,11 @@ export let Context1 = createContext();
 function App() {
   let [shoes, setShoes] = useState(data);
   let [재고, 재고변경] = useState([10, 11, 12]);
+
+  let obj = { name: "Lee" };
+  localStorage.setItem("data", JSON.stringify(obj));
+  let out = localStorage.getItem("data");
+  console.log(JSON.parse(out));
 
   return (
     <div className="App">
