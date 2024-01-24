@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../sotre/userSlice";
 import { increaseAge } from "../sotre/userSlice";
 import { addCount } from "../store";
-import { memo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 
 // memo를 사용해서 자식컴포넌트의 재렌더링 막기
 // child라는 컴포넌트가 무거운거면 개꿀
@@ -12,13 +12,23 @@ let Child = memo(function () {
   return <div>자식컴포넌트</div>;
 });
 
+function 무거운함수() {
+  return "반복문 10억번 돌린결과";
+}
+
 export default function Cart() {
   let [count, setCount] = useState(0);
-
   let state = useSelector((state) => {
     return state;
   });
   let dispatch = useDispatch();
+
+  //useMemo사용시 컴포넌트 렌더링시 1회만 실행시켜줌
+  //useEffect랑 똑같이 디펜던시도 사용가능 []
+  //차이점으로는 실행시점 차이 useEffect는 html랜더링 이후 실행되지만 useMemo는 그전에 실행
+  let result = useMemo(() => {
+    return 무거운함수();
+  }, []);
 
   console.log(state);
 
