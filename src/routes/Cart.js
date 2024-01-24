@@ -6,6 +6,7 @@ import { addCount } from "../store";
 import { memo, useState } from "react";
 
 // memo를 사용해서 자식컴포넌트의 재렌더링 막기
+// child라는 컴포넌트가 무거운거면 개꿀
 let Child = memo(function () {
   console.log("버튼클릭시 얘도 재렌더링되나?");
   return <div>자식컴포넌트</div>;
