@@ -2,7 +2,15 @@ import "./App.css";
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import data from "./data.js";
-import { createContext, lazy, Suspense, useEffect, useState } from "react";
+import {
+  createContext,
+  lazy,
+  Suspense,
+  useDeferredValue,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import {
   Routes,
   Route,
@@ -47,6 +55,7 @@ function App() {
 
   return (
     <div className="App">
+      <Study />
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
@@ -134,6 +143,35 @@ function Card(props) {
       />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
+    </div>
+  );
+}
+
+//useTransition, useDeferredValue 학습
+function Study() {
+  let [name, setName] = useState("");
+  console.log(name);
+  let [isPending, startTransition] = useTransition();
+  let state = useDeferredValue(state); //얘도 startTransition과 같은 기능을함 늦게처리하고싶은 스테이트를 안에 넣어서 실행
+
+  let a = new Array(10000).fill(0);
+
+  return (
+    <div>
+      <input
+        onChange={(e) => {
+          //성능저하원인에다가 사용시 코드시작 시점을 뒤로 늦춰 성능이 향상됨 (카드 빚 돌려막기 같음)
+          startTransition(() => {
+            setName(e.target.value);
+          });
+        }}
+      />
+      {/* isPending은 startTransition이 처리중일때 true가 됨으로 그동안 로딩중같은 내용 출력가능 */}
+      {isPending
+        ? "로딩중"
+        : a.map(() => {
+            return <div>{name}</div>; //useDeferredValue를 사용하려면 {name} 대신 {state}사용
+          })}
     </div>
   );
 }
