@@ -3,8 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../sotre/userSlice";
 import { increaseAge } from "../sotre/userSlice";
 import { addCount } from "../store";
+import { memo, useState } from "react";
+
+// memo를 사용해서 자식컴포넌트의 재렌더링 막기
+let Child = memo(function () {
+  console.log("버튼클릭시 얘도 재렌더링되나?");
+  return <div>자식컴포넌트</div>;
+});
 
 export default function Cart() {
+  let [count, setCount] = useState(0);
+
   let state = useSelector((state) => {
     return state;
   });
@@ -14,6 +23,14 @@ export default function Cart() {
 
   return (
     <div>
+      <Child />
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        일부로 렌더링
+      </button>
       {state.user.age}
       <button
         onClick={() => {
