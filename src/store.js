@@ -15,6 +15,7 @@ import user from "./sotre/userSlice";
 // });
 // export let { setUser, increaseAge } = user.actions;
 
+// redux toolkit을 사용하여 공유할 스테이트 생성
 let stock = createSlice({
   name: "stock",
   initialState: [10, 11, 12],
@@ -26,6 +27,7 @@ let item = createSlice({
     { id: 0, name: "White and Black", count: 2 },
     { id: 2, name: "Grey Yordan", count: 1 },
   ],
+  // 스테이트 변경함수 사용법
   reducers: {
     addCount(state, action) {
       let id = state.findIndex((item) => {
@@ -38,8 +40,10 @@ let item = createSlice({
     },
   },
 });
+// 스테이트 변경함수 생성 이후 등록 필수
 export let { addCount, addItem } = item.actions;
 
+// 스테이트 생성 이후 등록 필수
 export default configureStore({
   reducer: {
     user: user.reducer,

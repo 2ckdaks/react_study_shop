@@ -15,6 +15,7 @@ root.render(
   // <React.StrictMode>
   //react-query 셋팅
   <QueryClientProvider client={queryClient}>
+    {/* props전송없이 state 공유를 위한 Redux/toolkit 셋팅 */}
     <Provider store={store}>
       <BrowserRouter>
         <App />

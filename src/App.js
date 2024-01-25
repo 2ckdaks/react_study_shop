@@ -35,6 +35,7 @@ function App() {
   let [shoes, setShoes] = useState(data);
   let [재고, 재고변경] = useState([10, 11, 12]);
 
+  // 최근본상품등 웹브라우저내 localstorage에 저장/출력 문법
   let obj = { name: "Lee" };
   localStorage.setItem("data", JSON.stringify(obj));
   let out = localStorage.getItem("data");
@@ -48,6 +49,7 @@ function App() {
     }
   }, []);
 
+  // react-query로 실시간으로 데이터 받아오는 코드(일정간격 반복 실행, 간격조절 가능) + 로딩/에러 상태 출력가능
   useQuery("작명", async () => {
     const a = await axios.get("https://codingapple1.github.io/userdata.json");
     return console.log(a.data);
@@ -68,11 +70,14 @@ function App() {
       </Navbar>
       {/* routes안에 컴포넌트를 보통 전부 lazy임포트하기때문에 로딩 화면 추가 */}
       <Suspense fallback={<div>loading</div>}>
+        {/* 라우터를 이용하여 페이지 나누기 */}
+        {/* onClick시 다음페이지 이전페이지등 다양한 기능 사용 가능 */}
         <Routes>
           <Route
             path="/"
             element={
               <div>
+                {/* 이미지 속성/스타일은 prop전송또한 가능 */}
                 <div className="main-bg">{/* <img src='/bg.png' /> */}</div>
                 <div className="container">
                   <div className="row">
@@ -83,6 +88,7 @@ function App() {
                 </div>
                 <button
                   onClick={() => {
+                    // axios라이브러리를 사용하여 서버와 통신 가능
                     axios
                       .get("https://codingapple1.github.io/shop/data2.json")
                       .then((결과) => {
@@ -117,16 +123,18 @@ function App() {
             <Route path="member" element={<div>멤버들</div>} />
             <Route path="location" element={<div>회사위치</div>} />
           </Route>
-
+          {/* 상세페이지를 위한 URL파라미터 사용 */}
           <Route
             path="/detail/:id"
             element={
+              // context api를 사용하여 props전송없이 자식 컴포넌트로 스테이트 전송
               <Context1.Provider value={{ 재고, shoes }}>
                 <Detail shoes={shoes} />
               </Context1.Provider>
             }
           />
           <Route path="/cart" element={<Cart />} />
+          {/* 만들어둔 라우트페이지를 제외한 모든페이지에 출력 404페이지 */}
           <Route path="*" element={<div>없는페이지임</div>} />
         </Routes>
       </Suspense>

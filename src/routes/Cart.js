@@ -21,6 +21,7 @@ export default function Cart() {
   let state = useSelector((state) => {
     return state;
   });
+  // redux toolkit에서 등록한 스테이트 변경함수 실행을 위해 useDispatch로 감싸기 필수
   let dispatch = useDispatch();
 
   //useMemo사용시 컴포넌트 렌더링시 1회만 실행시켜줌

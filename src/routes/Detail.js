@@ -8,6 +8,7 @@ import { Context1 } from "./../App.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../store";
 
+// styled componets 사용
 let Box = styled.div`
   padding: 20px;
   color: grey;
@@ -29,6 +30,7 @@ export default function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
 
+  // context API로 전송받은 스테이트 사용
   let { 재고 } = useContext(Context1);
 
   let findItem = props.shoes.find((x) => x.id == id);
@@ -65,6 +67,7 @@ export default function Detail(props) {
           <h4 className="pt-5">{props.shoes[id].title}</h4>
           <p>{props.shoes[id].content}</p>
           <p>{props.shoes[id].price}</p>
+          {/* 스타일컴포넌트의 이너스타일또한 porps전송으로 적용 가능 */}
           <YellowBtn
             bg="skyblue"
             className="btn btn-danger"
